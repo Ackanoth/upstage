@@ -1,0 +1,38 @@
+#chat {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  right: 0px;
+  width: 30%;
+  float: right;
+  border: 1px solid #5DA332;
+}
+
+#chat-log {
+  position: absolute;
+  border: 1px solid #5DA332;
+  list-style-type: none;
+  display: block;
+  top: 0px;
+  bottom: 30px;
+  left: 0px;
+  right: 0px;
+  margin: 0px;
+}
+
+#chat-log > li {
+  display: block;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin: 0px;
+}
+
+input {
+  border: 1px solid #5DA332;
+  float: left;
+  width: 99%;
+  clear: both;
+  bottom: 0px;
+  height: 30px;
+  position: absolute;
+}

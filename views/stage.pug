@@ -1,0 +1,17 @@
+doctype html
+html(lang='en', ng-app='upstage')
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/stage.css')
+  body
+    div(id='stage-container')
+      canvas(id='stage')
+    div(id='chat', ng-controller='ChatCtrl')
+      ul(id='chat-log')
+        li(ng-repeat='m in messages track by $index')
+          span {{m.txt}}
+      form(ng-submit='sendMessage()')
+        input(type='text', ng-model='newMessage.txt')
+    script(src='/socket.io/socket.io.js')
+    script(src='/javascripts/lib/angular/angular.min.js')
+    script(src='/javascripts/client.js')
