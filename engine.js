@@ -6,15 +6,14 @@ var io = socketio();
 var auditorium = io.of('/auditorium');
 
 auditorium.on('connection', function(socket) {
-  console.log('user entered an auditorium');
+  console.log('client connected');
   
   socket.on('disconnect', function() {
-    console.log('user has left an auditorium');
+    console.log('client disconnected');
   });
 
   socket.on('user:connected', function() {
-    console.log('recieved user:connected');
-    auditorium.emit('user:connected', {});
+    auditorium.emit('user:connected');
   });
 
   socket.on('chat:message', function(payload) {
