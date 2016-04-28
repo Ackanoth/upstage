@@ -6,18 +6,24 @@ var io = socketio();
 var auditorium = io.of('/auditorium');
 
 auditorium.on('connection', function(socket) {
-  console.log('client connected');
-  
-  socket.on('disconnect', function() {
-    console.log('client disconnected');
-  });
 
   socket.on('user:connected', function() {
     auditorium.emit('user:connected');
   });
 
+  socket.on('stage:start_draw', function(data) {
+    this.broadcast.emit('stage:start_draw', data);
+  });
+
+  socket.on('stage:draw', function(data) {
+    this.broadcast.emit('stage:draw', data);
+  });
+
+  socket.on('stage:start_draw', function(data) {
+    this.broadcast.emit('stage:finish_draw', data);
+  });
+
   socket.on('chat:message', function(payload) {
-    console.log('chat:message: ', payload);
     auditorium.emit('chat:message', payload);
   })
 

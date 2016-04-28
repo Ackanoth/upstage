@@ -4,8 +4,8 @@ html(lang='en', ng-app='upstage')
     title= title
     link(rel='stylesheet', href='/stylesheets/stage.css')
   body
-    div(id='stage-container')
-      canvas(id='stage')
+    div(id='stage-container', ng-controller="StageCtrl")
+      canvas(id='stage', ng-mousedown="mouseDown($event)", ng-mousemove="mouseMove($event)", ng-mouseup="mouseUp($event)")
     div(id='chat', ng-controller='ChatCtrl')
       ul(id='chat-log')
         li(ng-repeat='m in messages track by $index')

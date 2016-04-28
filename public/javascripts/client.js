@@ -26,4 +26,59 @@
       $scope.newMessage.txt = '';
     }
   }]);
+
+  app.controller('StageCtrl', ['$scope', 'Socket', function($scope, Socket) {
+
+    $scope.io = Socket;
+
+    var canv = document.getElementById('stage');
+    var cont = document.getElementById('stage-container');
+    canv.height = cont.offsetHeight;
+    canv.width = cont.offsetWidth;
+    $scope.ctx = canv.getContext("2d");
+    $scope.isDrawing = false;
+
+    $scope.mouseDown = function(e) {
+      $scope.isDrawing = true;
+      $scope.io.emit('stage:start_draw', { x: e.pageX, y: e.pageY });
+      $scope.startDrawing(e.pageX, e.pageY);
+    };
+    $scope.mouseMove = function(e) {
+      if ($scope.isDrawing) {
+        $scope.io.emit('stage:draw', { x: e.pageX, y: e.pageY });
+        $scope.draw(e.pageX, e.pageY);
+      }
+    };
+    $scope.mouseUp = function(e) {
+      $scope.isDrawing = false;
+      $scope.io.emit('stage:finish_draw', { x: e.pageX, y: e.pageY });
+      $scope.finishDrawing();
+    };
+
+    $scope.startDrawing = function(x, y) {
+      $scope.ctx.beginPath();
+      $scope.ctx.moveTo(x, y);
+    };
+    $scope.draw = function(x, y) {
+      $scope.ctx.lineTo(x, y);
+      $scope.ctx.strokeStyle = "#000";
+      $scope.ctx.stroke();
+    };
+    $scope.finishDrawing = function() {
+      $scope.ctx.closePath();
+    }
+
+    $scope.io.on('stage:start_draw', function(data) {
+      $scope.startDrawing(data.x, data.y);
+    });
+
+    $scope.io.on('stage:draw', function(data) {
+      $scope.draw(data.x, data.y);
+    });
+
+    $scope.io.on('stage:finish_draw', function(data) {
+      $scope.finishDrawing();
+    });
+
+  }]);
 }).call(this);
