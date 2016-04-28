@@ -24,7 +24,7 @@ auditorium.on('connection', function(socket) {
     this.broadcast.emit('stage:draw', data);
   });
 
-  socket.on('stage:start_draw', function(data) {
+  socket.on('stage:finish_draw', function(data) {
     debug('stage:finish_draw', data);
     this.broadcast.emit('stage:finish_draw', data);
   });
