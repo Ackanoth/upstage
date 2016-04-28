@@ -9,9 +9,9 @@
   app.controller('ChatCtrl', ['$scope', 'Socket', function($scope, Socket) {
     $scope.io = Socket;
     $scope.messages = [];
-    $scope.io.emit('user:connected', {});
+    $scope.io.emit('chat:join', {});
 
-    $scope.io.on('user:connected', function() {
+    $scope.io.on('chat:join', function() {
       $scope.messages.push({ txt: 'User connected' });
       $scope.$apply();
     });
