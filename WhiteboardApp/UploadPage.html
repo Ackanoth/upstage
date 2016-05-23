@@ -1,0 +1,35 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>File Upload</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <form method="POST" action="upload" enctype="multipart/form-data" >
+            File:
+            <input type="file" name="file" id="file" /> 
+            <br/>
+            Destination:
+            <input type="text" value="/tmp" name="destination"/>
+            </br>
+            <table>
+
+                            <tr>
+                                <th>Color</th>
+                                <td><input type="radio" name="color" value="#FF0000" checked="true">Avatar</td>
+                                <td><input type="radio" name="color" value="#0000FF">Backdrop</td>
+                                <td><input type="radio" name="color" value="#FF9900">Prop</td>
+                                <td><input type="radio" name="color" value="#33CC33">Audio</td>
+                                <td><input type="radio" name="color" value="#33CC33">Video</td>
+                            </tr>
+
+                            
+
+                        </table>
+            <input type="submit" value="Upload" name="upload" id="upload" />
+        </form>
+    </body>
+</html>
+    
